@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tailwind CDN Example</title>
+  <title>Blood Donation</title>
   <!-- tailwind css link  -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- css file link  -->
@@ -12,7 +12,7 @@
 <body>
 
 <!-- Nav start-->
-<nav class="fixed w-full top-0 left-0 z-50 bg-gradient-to-r from-red-800 via-red-700 to-pink-600 shadow-2xl backdrop-blur-md border-b border-red-700 transition-all duration-300">
+<nav class="fixed w-full top-0 left-0 z-50 bg-gradient-to-r from-red-800 via-red-800 to-red-800 shadow-2xl backdrop-blur-md border-b border-red-700 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
     <div class="max-w-[1140px] mx-auto flex justify-between items-center h-16">
 
@@ -72,6 +72,45 @@
 </nav>
 <!-- Nav end-->
 
+
+<!-- Hero section start  -->
+ <!-- Hero Section -->
+<section class="relative w-full bg-gradient-to-r from-red-700 via-red-600 to-pink-600 overflow-hidden">
+  <!-- Background image -->
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1588776814546-4f0f9c1c5f7b?auto=format&fit=crop&w=1600&q=80" alt="Blood Donation" class="w-full h-full object-cover opacity-30">
+    <div class="absolute inset-0 bg-gradient-to-r from-red-800 via-red-700 to-pink-600 opacity-70"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col justify-center items-start h-screen text-white">
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow-lg">
+      Give Blood, Save Life
+    </h1>
+    <p class="mt-4 text-lg sm:text-xl lg:text-2xl max-w-2xl drop-shadow-md">
+      Join our nationwide blood donation network and help those in need. Your one donation can save multiple lives.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="mt-8 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+      <a href="#donate" class="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-600 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300">
+        Donate Blood
+      </a>
+      <a href="#request" class="px-6 py-3 bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 rounded-full text-red-900 font-bold shadow-lg hover:scale-105 transform transition duration-300">
+        Request Blood
+      </a>
+    </div>
+
+    <!-- Decorative Glass Card -->
+    <div class="mt-12 w-full max-w-md p-6 bg-white/10 backdrop-blur-xl rounded-xl shadow-2xl border border-white/20">
+      <p class="text-white text-lg font-medium text-center">
+        Be a Hero Today! Register as a donor and make a difference.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Hero section end  -->
 
 
 
