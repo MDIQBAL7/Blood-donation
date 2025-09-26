@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
               ></span>
             </a>
-            <a href="#donate" class="relative px-3 py-2 group">
+            <a  onclick="openModal('registerModal')" class="relative px-3 py-2 group">
               Donate
               <span
                 class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
             >Home</a
           >
           <a
-            href="#donate"
+            onclick="openModal('registerModal')"
             class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
             >Donate</a
           >
