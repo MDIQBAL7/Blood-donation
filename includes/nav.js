@@ -1,10 +1,9 @@
-const nav = `
-    
-`;
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const navbarHTML = `
-    <nav
+      <nav
       class="fixed w-full top-0 left-0 z-50 bg-gradient-to-r from-red-800 via-red-800 to-red-800 shadow-2xl backdrop-blur-md border-b border-red-700 transition-all duration-300"
     >
       <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -123,11 +122,31 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     </nav>
-  `;
+  ` // আপনার আগের navbar কোড
 
-  // Select all elements with class 'navbar' and add the navbar HTML
+  // Navbar insert করা
   const navContainers = document.querySelectorAll(".navbar");
   navContainers.forEach(container => {
     container.innerHTML = navbarHTML;
+  });
+
+  // 🟢 Mobile Menu Toggle Code
+  document.addEventListener("click", (e) => {
+    const menu = document.querySelector("#mobile-menu");
+    const button = document.querySelector("#mobile-menu-button");
+
+    if (button && button.contains(e.target)) {
+      menu.classList.toggle("translate-x-full"); // hide
+      menu.classList.toggle("translate-x-0");    // show
+
+      // animation সহ links গুলো একে একে আসবে
+      const links = menu.querySelectorAll(".mobile-item");
+      links.forEach((link, i) => {
+        setTimeout(() => {
+          link.classList.toggle("opacity-0");
+          link.classList.toggle("translate-x-10");
+        }, i * 100);
+      });
+    }
   });
 });

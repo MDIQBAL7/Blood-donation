@@ -77,6 +77,146 @@
     </section>
     <!-- Hero section end  -->
 
+<!-- login modal start  -->
+ <!-- Buttons -->
+<div class="flex gap-4 justify-center mt-10">
+  <button id="loginBtn" class="px-6 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">Login</button>
+  <button id="registerBtn" class="px-6 py-2 bg-yellow-400 text-red-900 rounded-lg shadow hover:bg-yellow-500 transition">Register</button>
+</div>
+
+<!-- Modal -->
+<div id="modalOverlay" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center">
+  <div id="modalContent" class="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative">
+    <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900">&times;</button>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+      <h2 class="text-2xl font-bold mb-4">Login</h2>
+      <form id="loginFormJS" class="space-y-3">
+        <input type="email" id="loginEmail" placeholder="Email" required class="w-full p-3 border rounded-lg" />
+        <input type="password" id="loginPassword" placeholder="Password" required class="w-full p-3 border rounded-lg" />
+        <button type="submit" class="w-full py-3 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">Login</button>
+      </form>
+      <p class="text-center text-gray-600 mt-2">Don't have an account? 
+        <span id="switchToRegister" class="text-red-600 hover:underline cursor-pointer">Register</span>
+      </p>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="registerForm" class="hidden">
+      <h2 class="text-2xl font-bold mb-4">Register</h2>
+      <form id="registerFormJS" class="space-y-3">
+        <input type="text" id="registerName" placeholder="Full Name" required class="w-full p-3 border rounded-lg" />
+        <input type="email" id="registerEmail" placeholder="Email" required class="w-full p-3 border rounded-lg" />
+        <input type="password" id="registerPassword" placeholder="Password" required class="w-full p-3 border rounded-lg" />
+        <button type="submit" class="w-full py-3 bg-yellow-400 text-red-900 rounded-lg shadow hover:bg-yellow-500 transition">Register</button>
+      </form>
+      <p class="text-center text-gray-600 mt-2">Already have an account? 
+        <span id="switchToLogin" class="text-red-600 hover:underline cursor-pointer">Login</span>
+      </p>
+    </div>
+
+  </div>
+</div>
+<script>
+  // Modal controls
+const loginBtn = document.getElementById("loginBtn");
+const registerBtn = document.getElementById("registerBtn");
+const modalOverlay = document.getElementById("modalOverlay");
+const closeModal = document.getElementById("closeModal");
+const loginFormDiv = document.getElementById("loginForm");
+const registerFormDiv = document.getElementById("registerForm");
+const switchToRegister = document.getElementById("switchToRegister");
+const switchToLogin = document.getElementById("switchToLogin");
+
+loginBtn.addEventListener("click", () => {
+  modalOverlay.classList.remove("hidden");
+  loginFormDiv.classList.remove("hidden");
+  registerFormDiv.classList.add("hidden");
+});
+
+registerBtn.addEventListener("click", () => {
+  modalOverlay.classList.remove("hidden");
+  registerFormDiv.classList.remove("hidden");
+  loginFormDiv.classList.add("hidden");
+});
+
+closeModal.addEventListener("click", () => modalOverlay.classList.add("hidden"));
+
+switchToRegister.addEventListener("click", () => {
+  loginFormDiv.classList.add("hidden");
+  registerFormDiv.classList.remove("hidden");
+});
+
+switchToLogin.addEventListener("click", () => {
+  registerFormDiv.classList.add("hidden");
+  loginFormDiv.classList.remove("hidden");
+});
+
+modalOverlay.addEventListener("click", e => {
+  if(e.target === modalOverlay) modalOverlay.classList.add("hidden");
+});
+
+// ----------------------
+// Registration & Login JS
+// ----------------------
+
+function validatePassword(password) {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+  return regex.test(password);
+}
+
+function validateEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+// Registration
+document.getElementById("registerFormJS").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("registerName").value;
+  const email = document.getElementById("registerEmail").value;
+  const password = document.getElementById("registerPassword").value;
+
+  if(!validateEmail(email)) return alert("Enter a valid email!");
+  if(!validatePassword(password)) return alert("Password must be 8+ chars with uppercase, lowercase, number, and special char.");
+
+  // Hash password
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  // Save to localStorage
+  const user = { name, email, password: hashedPassword };
+  localStorage.setItem("user_" + email, JSON.stringify(user));
+
+  alert("Registration successful! Please login.");
+  registerFormDiv.classList.add("hidden");
+  loginFormDiv.classList.remove("hidden");
+});
+
+// Login
+document.getElementById("loginFormJS").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  const storedUser = localStorage.getItem("user_" + email);
+  if(!storedUser) return alert("User not found");
+
+  const user = JSON.parse(storedUser);
+  if(bcrypt.compareSync(password, user.password)) {
+    alert("Login successful! Welcome " + user.name);
+    modalOverlay.classList.add("hidden");
+  } else {
+    alert("Incorrect password");
+  }
+});
+
+</script>
+
+<!-- bcryptjs CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+
+<!-- login modal end -->
     <!-- js file link  -->
     <script src="app.js"></script>
     <script src="includes/nav.js"></script>
