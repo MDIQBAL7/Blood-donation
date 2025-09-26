@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <!-- Logo -->
           <div class="flex items-center space-x-2">
             <a
-              href="#home"
+              href="index.html"
               class="text-3xl font-extrabold text-white hover:text-yellow-400 transition-all duration-300"
               >Blood Donation</a
             >
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div
             class="hidden lg:flex items-center space-x-6 font-medium text-white tracking-wide"
           >
-            <a href="#home" class="relative px-3 py-2 group">
+            <a href="index.html" class="relative px-3 py-2 group">
               Home
               <span
                 class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
               ></span>
             </a>
-            <a href="#request" class="relative px-3 py-2 group">
+            <a href="dooner.html" class="relative px-3 py-2 group">
               Request
               <span
                 class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       >
         <div class="flex flex-col px-6 pt-6 space-y-4">
           <a
-            href="#home"
+            href="index.html"
             class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
             >Home</a
           >
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             >Donate</a
           >
           <a
-            href="#request"
+            href="dooner.html"
             class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
             >Request</a
           >

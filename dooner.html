@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Donation</title>
+    <!-- tailwind css link  -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- css file link  -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-zinc-900 ">
+    <!-- Nav start-->
+    <div class="navbar"></div>
+    <!-- Nav end-->
+
+    <main>
+      <section
+        class="max-w-7xl mx-auto px-6 py-12 bg-zinc-900 shadow-2xl transition-all mt-11"
+      >
+        <!-- Header -->
+        <header class="text-center mb-12 max-w-[1140px] mx-auto">
+          <h1
+            class="text-4xl font-extrabold text-emerald-700 dark:text-emerald-400 tracking-tight"
+          >
+            Blood Donor Registry
+          </h1>
+          <p class="text-zinc-600 dark:text-zinc-300 mt-3 text-lg">
+            Find life-saving donors by location, blood group, or name
+          </p>
+        </header>
+
+        <!-- Search + Filters -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-10 max-w-[1140px] mx-auto">
+          <div class="md:col-span-2">
+            <label
+              for="searchInput"
+              class="block text-lg font-bold text-zinc-700 dark:text-zinc-300 mb-1"
+              >Search by Name or Contact</label
+            >
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="name or number"
+              class="w-full bg-slate-400 rounded-lg shadow-sm px-4 py-2"
+            />
+          </div>
+          <div>
+            <label
+              for="districtFilter"
+              class="block text-lg font-bold text-zinc-700 dark:text-zinc-300 mb-1"
+              >District</label
+            >
+            <select
+              id="districtFilter"
+              class="w-full bg-slate-400 py-2 px-4 rounded-lg shadow-sm "
+            >
+              <option value="">All</option>
+              <option value="Dhaka">Dhaka</option>
+              <option value="Chittagong">Chittagong</option>
+            </select>
+          </div>
+          <div>
+            <label
+              for="zilaFilter"
+              class="block text-lg font-bold text-zinc-700 dark:text-zinc-300 mb-1"
+              >Zila</label
+            >
+            <select
+              id="zilaFilter"
+              class="w-full rounded-lg shadow-sm bg-slate-400 px-4 py-2"
+            >
+              <option value="">All</option>
+              <option value="Mirpur">Mirpur</option>
+              <option value="Agrabad">Agrabad</option>
+            </select>
+          </div>
+          <div>
+            <label
+              for="bloodFilter"
+              class="block text-lg font-bold text-zinc-700 dark:text-zinc-300 mb-1"
+              >Blood Group</label
+            >
+            <select
+              id="bloodFilter"
+              class="w-full rounded-lg shadow-sm bg-slate-400 px-4 py-2"
+            >
+              <option class="bg-slate-400 focus:bg-red-500 hover:bg-slate-500" value="">All</option>
+              <option class="bg-slate-400 focus:bg-red-500 hover:bg-slate-500" value="A+">A+</option>
+              <option class="bg-slate-400 focus:bg-red-500 hover:bg-slate-500" value="B-">B-</option>
+              <option class="bg-slate-400 focus:bg-red-500 hover:bg-slate-500" value="O+">O+</option>
+              <option class="bg-slate-400 focus:bg-red-500 hover:bg-slate-500" value="AB+">AB+</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Donor List -->
+        <div
+          id="donorList"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all max-w-[1140px] mx-auto"
+        >
+          <!-- Donors will be injected here -->
+        </div>
+      </section>
+    </main>
+    <script>
+      const donors = [
+        {
+          name: "Iqbal Hossain",
+          blood: "A+",
+          district: "Dhaka",
+          zila: "Mirpur",
+          upazila: "Uttara",
+          contact: "017XXXXXXXX",
+        },
+        {
+          name: "Rina Akter",
+          blood: "B-",
+          district: "Chittagong",
+          zila: "Agrabad",
+          upazila: "Halishahar",
+          contact: "018XXXXXXXX",
+        },
+        {
+          name: "Tanvir Rahman",
+          blood: "O+",
+          district: "Dhaka",
+          zila: "Mirpur",
+          upazila: "Uttara",
+          contact: "019XXXXXXXX",
+        },
+        {
+          name: "Tanvir Rahman",
+          blood: "O+",
+          district: "Dhaka",
+          zila: "Mirpur",
+          upazila: "Uttara",
+          contact: "019XXXXXXXX",
+        },
+        {
+          name: "Tanvir Rahman",
+          blood: "O+",
+          district: "Dhaka",
+          zila: "Mirpur",
+          upazila: "Uttara",
+          contact: "019XXXXXXXX",
+        },
+        {
+          name: "Tanvir Rahman",
+          blood: "O+",
+          district: "Dhaka",
+          zila: "Mirpur",
+          upazila: "Uttara",
+          contact: "019XXXXXXXX",
+        },
+      ];
+
+      const donorList = document.getElementById("donorList");
+      const districtFilter = document.getElementById("districtFilter");
+      const zilaFilter = document.getElementById("zilaFilter");
+      const bloodFilter = document.getElementById("bloodFilter");
+      const searchInput = document.getElementById("searchInput");
+
+      function renderDonors() {
+        const district = districtFilter.value.toLowerCase();
+        const zila = zilaFilter.value.toLowerCase();
+        const blood = bloodFilter.value.toLowerCase();
+        const search = searchInput.value.toLowerCase();
+
+        const filtered = donors.filter(
+          (d) =>
+            (!district || d.district.toLowerCase() === district) &&
+            (!zila || d.zila.toLowerCase() === zila) &&
+            (!blood || d.blood.toLowerCase() === blood) &&
+            (!search ||
+              d.name.toLowerCase().includes(search) ||
+              d.contact.includes(search))
+        );
+
+        donorList.innerHTML = filtered.length
+          ? filtered
+              .map(
+                (d) => `
+          <div class="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 shadow hover:shadow-lg transition transform hover:-translate-y-1">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-xl font-bold text-emerald-800 dark:text-emerald-300">${d.name}</h2>
+              <span class="px-3 py-1 text-sm font-semibold bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded-full">${d.blood}</span>
+            </div>
+            <ul class="text-zinc-700 dark:text-zinc-300 space-y-1 text-sm">
+              <li><strong>District:</strong> ${d.district}</li>
+              <li><strong>Zila:</strong> ${d.zila}</li>
+              <li><strong>Upazila:</strong> ${d.upazila}</li>
+              <li><strong>Contact:</strong> ${d.contact}</li>
+            </ul>
+          </div>
+        `
+              )
+              .join("")
+          : `<div class="col-span-full text-center text-zinc-500 dark:text-zinc-400 text-lg">
+            <img src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png" alt="No results" class="mx-auto w-24 mb-4 opacity-70" />
+            🚫 No donors match your filters.
+          </div>`;
+      }
+
+      [districtFilter, zilaFilter, bloodFilter, searchInput].forEach((el) =>
+        el.addEventListener("input", renderDonors)
+      );
+
+      renderDonors(); // Initial render
+    </script>
+
+    <!-- js file link  -->
+    <script src="app.js"></script>
+    <script src="includes/nav.js"></script>
+  </body>
+</html>
