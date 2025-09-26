@@ -78,139 +78,153 @@
     <!-- Hero section end  -->
 
 <!-- login modal start  -->
- <!-- Buttons -->
-<div class="flex gap-4 justify-center mt-10">
-  <button id="loginBtn" class="px-6 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">Login</button>
-  <button id="registerBtn" class="px-6 py-2 bg-yellow-400 text-red-900 rounded-lg shadow hover:bg-yellow-500 transition">Register</button>
-</div>
+<!-- Registration Modal -->
+<div class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" id="registerModal">
+  <div class="relative bg-white/95 backdrop-blur-xl border border-gray-200 rounded-3xl shadow-2xl w-full max-w-md p-8 transform scale-95 opacity-0 transition-all duration-300 max-h-[90vh] overflow-y-auto no-scrollbar">
+    
+    <!-- Close Button -->
+    <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-pink-500 text-xl">✖</button>
 
-<!-- Modal -->
-<div id="modalOverlay" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center">
-  <div id="modalContent" class="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative">
-    <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900">&times;</button>
+    <!-- Title -->
+    <h2 class="text-3xl font-extrabold text-center text-gray-900">Create Account</h2>
+    <p class="text-center text-gray-500 mt-1">Register & verify your NID and Phone</p>
 
-    <!-- Login Form -->
-    <div id="loginForm">
-      <h2 class="text-2xl font-bold mb-4">Login</h2>
-      <form id="loginFormJS" class="space-y-3">
-        <input type="email" id="loginEmail" placeholder="Email" required class="w-full p-3 border rounded-lg" />
-        <input type="password" id="loginPassword" placeholder="Password" required class="w-full p-3 border rounded-lg" />
-        <button type="submit" class="w-full py-3 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">Login</button>
-      </form>
-      <p class="text-center text-gray-600 mt-2">Don't have an account? 
-        <span id="switchToRegister" class="text-red-600 hover:underline cursor-pointer">Register</span>
-      </p>
+    <!-- Form -->
+    <form id="registerForm" class="mt-6 space-y-4">
+      <input type="text" placeholder="Full Name" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
+      <input type="email" placeholder="Email Address" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
+      <input type="tel" id="phone" placeholder="Phone Number (+880...)" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
+      <input type="text" id="otpInput" placeholder="Enter OTP" class="w-full px-4 py-3 border rounded-xl hidden" maxlength="6">
+      <button type="button" id="verifyBtn" class="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white py-3 rounded-xl shadow hidden hover:scale-105 transition transform" onclick="verifyOTP()">Verify OTP</button>
+      
+      <!-- Password -->
+      <input type="password" placeholder="Password" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
+
+      <!-- NID -->
+      <input type="text" id="nidNumber" placeholder="NID Number (auto)" readonly class="w-full px-4 py-3 border rounded-xl bg-gray-100 outline-none shadow-sm">
+
+      <button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-xl shadow hover:scale-105 transition transform mt-2">Register</button>
+    </form>
+
+    <!-- Camera -->
+    <div class="mt-6 flex flex-col items-center space-y-3">
+      <video id="camera" autoplay class="w-full h-48 sm:h-56 border rounded-lg shadow"></video>
+      <canvas id="snapshot" class="hidden"></canvas>
+      <button type="button" onclick="captureNID()" class="px-6 py-2 bg-pink-600 text-white rounded-xl shadow hover:scale-105 transition transform">Capture NID</button>
+      <img id="capturedImage" class="w-full rounded-lg shadow hidden"/>
+      <p class="text-sm text-gray-500 text-center mt-2">Ensure your NID is clear and readable</p>
     </div>
 
-    <!-- Registration Form -->
-    <div id="registerForm" class="hidden">
-      <h2 class="text-2xl font-bold mb-4">Register</h2>
-      <form id="registerFormJS" class="space-y-3">
-        <input type="text" id="registerName" placeholder="Full Name" required class="w-full p-3 border rounded-lg" />
-        <input type="email" id="registerEmail" placeholder="Email" required class="w-full p-3 border rounded-lg" />
-        <input type="password" id="registerPassword" placeholder="Password" required class="w-full p-3 border rounded-lg" />
-        <button type="submit" class="w-full py-3 bg-yellow-400 text-red-900 rounded-lg shadow hover:bg-yellow-500 transition">Register</button>
-      </form>
-      <p class="text-center text-gray-600 mt-2">Already have an account? 
-        <span id="switchToLogin" class="text-red-600 hover:underline cursor-pointer">Login</span>
-      </p>
-    </div>
-
+    <!-- Switch -->
+    <p class="mt-6 text-sm text-gray-600 text-center">
+      Already have an account?
+      <button onclick="switchToLogin()" class="text-pink-600 font-semibold hover:underline">Login</button>
+    </p>
   </div>
 </div>
+
+<!-- Login Modal -->
+<div class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" id="loginModal">
+  <div class="relative bg-white/95 backdrop-blur-xl border border-gray-200 rounded-3xl shadow-2xl w-full max-w-md p-8 transform scale-95 opacity-0 transition-all duration-300">
+    
+    <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-pink-500 text-xl">✖</button>
+
+    <h2 class="text-3xl font-extrabold text-center text-gray-900">Login</h2>
+    <p class="text-center text-gray-500 mt-1">Access your account</p>
+
+    <form class="mt-6 space-y-4">
+      <input type="email" placeholder="Email Address or phone number" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
+      <input type="password" placeholder="Password" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
+      <button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-xl shadow hover:scale-105 transition transform">Login</button>
+    </form>
+
+    <p class="mt-6 text-sm text-gray-600 text-center">
+      Don't have an account?
+      <button onclick="switchToRegister()" class="text-pink-600 font-semibold hover:underline">Register</button>
+    </p>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
 <script>
-  // Modal controls
-const loginBtn = document.getElementById("loginBtn");
-const registerBtn = document.getElementById("registerBtn");
-const modalOverlay = document.getElementById("modalOverlay");
-const closeModal = document.getElementById("closeModal");
-const loginFormDiv = document.getElementById("loginForm");
-const registerFormDiv = document.getElementById("registerForm");
-const switchToRegister = document.getElementById("switchToRegister");
-const switchToLogin = document.getElementById("switchToLogin");
+let generatedOTP = null;
+let otpVerified = false;
+const video = document.getElementById('camera');
+const canvas = document.getElementById('snapshot');
+const capturedImage = document.getElementById('capturedImage');
+const nidNumberInput = document.getElementById('nidNumber');
 
-loginBtn.addEventListener("click", () => {
-  modalOverlay.classList.remove("hidden");
-  loginFormDiv.classList.remove("hidden");
-  registerFormDiv.classList.add("hidden");
-});
-
-registerBtn.addEventListener("click", () => {
-  modalOverlay.classList.remove("hidden");
-  registerFormDiv.classList.remove("hidden");
-  loginFormDiv.classList.add("hidden");
-});
-
-closeModal.addEventListener("click", () => modalOverlay.classList.add("hidden"));
-
-switchToRegister.addEventListener("click", () => {
-  loginFormDiv.classList.add("hidden");
-  registerFormDiv.classList.remove("hidden");
-});
-
-switchToLogin.addEventListener("click", () => {
-  registerFormDiv.classList.add("hidden");
-  loginFormDiv.classList.remove("hidden");
-});
-
-modalOverlay.addEventListener("click", e => {
-  if(e.target === modalOverlay) modalOverlay.classList.add("hidden");
-});
-
-// ----------------------
-// Registration & Login JS
-// ----------------------
-
-function validatePassword(password) {
-  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-  return regex.test(password);
-}
-
-function validateEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
-
-// Registration
-document.getElementById("registerFormJS").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const name = document.getElementById("registerName").value;
-  const email = document.getElementById("registerEmail").value;
-  const password = document.getElementById("registerPassword").value;
-
-  if(!validateEmail(email)) return alert("Enter a valid email!");
-  if(!validatePassword(password)) return alert("Password must be 8+ chars with uppercase, lowercase, number, and special char.");
-
-  // Hash password
-  const hashedPassword = bcrypt.hashSync(password, 10);
-
-  // Save to localStorage
-  const user = { name, email, password: hashedPassword };
-  localStorage.setItem("user_" + email, JSON.stringify(user));
-
-  alert("Registration successful! Please login.");
-  registerFormDiv.classList.add("hidden");
-  loginFormDiv.classList.remove("hidden");
-});
-
-// Login
-document.getElementById("loginFormJS").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-
-  const storedUser = localStorage.getItem("user_" + email);
-  if(!storedUser) return alert("User not found");
-
-  const user = JSON.parse(storedUser);
-  if(bcrypt.compareSync(password, user.password)) {
-    alert("Login successful! Welcome " + user.name);
-    modalOverlay.classList.add("hidden");
-  } else {
-    alert("Incorrect password");
+function openModal(id) {
+  const modal = document.getElementById(id);
+  const box = modal.querySelector("div");
+  modal.classList.remove("hidden");
+  setTimeout(() => {
+    box.classList.remove("scale-95","opacity-0");
+    box.classList.add("scale-100","opacity-100");
+  }, 10);
+  if(id==='registerModal'){
+    navigator.mediaDevices.getUserMedia({video:true})
+      .then(stream=>video.srcObject=stream)
+      .catch(err=>alert("Camera not accessible: "+err));
   }
-});
+}
 
+function closeModal(id){
+  const modal=document.getElementById(id);
+  const box=modal.querySelector("div");
+  box.classList.remove("scale-100","opacity-100");
+  box.classList.add("scale-95","opacity-0");
+  setTimeout(()=>{
+    modal.classList.add("hidden");
+    if(id==='registerModal' && video.srcObject) video.srcObject.getTracks().forEach(t=>t.stop());
+  },200);
+}
+
+function switchToLogin(){closeModal('registerModal'); setTimeout(()=>openModal('loginModal'),250);}
+function switchToRegister(){closeModal('loginModal'); setTimeout(()=>openModal('registerModal'),250);}
+
+// OTP
+function sendOTP(){
+  const phone=document.getElementById('phone').value;
+  const phoneRegex=/^\+8801[0-9]{8}$/;
+  if(!phoneRegex.test(phone)){alert("❌ Enter valid Bangladeshi phone number"); return;}
+  generatedOTP=Math.floor(100000+Math.random()*900000);
+  console.log("Generated OTP:",generatedOTP);
+  alert("✅ OTP sent (demo). Check console.");
+  document.getElementById('otpInput').classList.remove('hidden');
+  document.getElementById('verifyBtn').classList.remove('hidden');
+}
+
+function verifyOTP(){
+  const entered=document.getElementById('otpInput').value;
+  if(entered==generatedOTP){otpVerified=true; alert("✅ OTP verified"); document.getElementById('otpInput').classList.add('hidden'); document.getElementById('verifyBtn').classList.add('hidden');}
+  else alert("❌ Invalid OTP");
+}
+
+// Capture NID + OCR
+function captureNID(){
+  const ctx=canvas.getContext('2d');
+  canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+  ctx.drawImage(video,0,0,canvas.width,canvas.height);
+  const imageData=canvas.toDataURL('image/png');
+  capturedImage.src=imageData; capturedImage.classList.remove('hidden');
+  alert("✅ NID captured. Running OCR...");
+  Tesseract.recognize(imageData,'eng',{logger:m=>console.log(m)})
+    .then(({data:{text}})=>{
+      const nid=text.replace(/\D/g,'').slice(0,17);
+      nidNumberInput.value=nid||"";
+      if(nid) alert("✅ NID detected: "+nid);
+      else alert("⚠ Could not detect NID");
+    });
+}
+
+// Registration submit
+document.getElementById('registerForm').addEventListener('submit',function(e){
+  if(!otpVerified){e.preventDefault(); alert("❌ Verify phone first");}
+  else if(!nidNumberInput.value){e.preventDefault(); alert("❌ Capture NID first");}
+  else{alert("✅ Registration ready!");}
+});
 </script>
 
 <!-- bcryptjs CDN -->

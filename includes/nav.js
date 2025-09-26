@@ -51,11 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="flex space-x-3 ml-4">
               <a
                 href="#login"
+                onclick="openModal('loginModal')"
                 class="px-5 py-2 bg-gradient-to-r from-pink-500 to-red-600 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300"
                 >Login</a
               >
               <a
                 href="#register"
+                onclick="openModal('registerModal')"
                 class="px-5 py-2 bg-gradient-to-r from-rose-400 to-red-700 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300"
                 >Register</a
               >
@@ -111,11 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
           >
           <a
             href="#login"
+            onclick="openModal('loginModal')"
             class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
             >Login</a
           >
           <a
             href="#register"
+            onclick="openModal('registerModal')"
             class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
             >Register</a
           >

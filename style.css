@@ -28,3 +28,15 @@
   100% { clip-path: inset(0 0 0 0); }        /* visible again left→right */
 }
 /* hero section style end */
+
+
+/* registration modal style start  */
+  /* Scrollbar Hide */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE & Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+/* registration modal style end */
