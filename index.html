@@ -79,49 +79,121 @@
 
 <!-- login modal start  -->
 <!-- Registration Modal -->
-<div class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" id="registerModal">
-  <div class="relative bg-white/95 backdrop-blur-xl border border-gray-200 rounded-3xl shadow-2xl w-full max-w-md p-8 transform scale-95 opacity-0 transition-all duration-300 max-h-[90vh] overflow-y-auto no-scrollbar">
+<div class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" id="registerModal">
+  <div class="relative bg-white/95 backdrop-blur-xl border border-gray-100 rounded-3xl shadow-2xl w-full max-w-2xl p-10 transform scale-95 opacity-0 transition-all duration-300 max-h-[90vh] overflow-y-auto no-scrollbar">
     
     <!-- Close Button -->
-    <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-pink-500 text-xl">✖</button>
+    <button onclick="closeModal('registerModal')" 
+      class="absolute top-5 right-5 text-gray-400 hover:text-red-600 text-2xl font-bold transition">
+      ✖
+    </button>
 
     <!-- Title -->
-    <h2 class="text-3xl font-extrabold text-center text-gray-900">Create Account</h2>
-    <p class="text-center text-gray-500 mt-1">Register & verify your NID and Phone</p>
-
-    <!-- Form -->
-    <form id="registerForm" class="mt-6 space-y-4">
-      <input type="text" placeholder="Full Name" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
-      <input type="email" placeholder="Email Address" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
-      <input type="tel" id="phone" placeholder="Phone Number (+880...)" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
-      <input type="text" id="otpInput" placeholder="Enter OTP" class="w-full px-4 py-3 border rounded-xl hidden" maxlength="6">
-      <button type="button" id="verifyBtn" class="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white py-3 rounded-xl shadow hidden hover:scale-105 transition transform" onclick="verifyOTP()">Verify OTP</button>
-      
-      <!-- Password -->
-      <input type="password" placeholder="Password" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none shadow-sm">
-
-      <!-- NID -->
-      <input type="text" id="nidNumber" placeholder="NID Number (auto)" readonly class="w-full px-4 py-3 border rounded-xl bg-gray-100 outline-none shadow-sm">
-
-      <button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-xl shadow hover:scale-105 transition transform mt-2">Register</button>
-    </form>
-
-    <!-- Camera -->
-    <div class="mt-6 flex flex-col items-center space-y-3">
-      <video id="camera" autoplay class="w-full h-48 sm:h-56 border rounded-lg shadow"></video>
-      <canvas id="snapshot" class="hidden"></canvas>
-      <button type="button" onclick="captureNID()" class="px-6 py-2 bg-pink-600 text-white rounded-xl shadow hover:scale-105 transition transform">Capture NID</button>
-      <img id="capturedImage" class="w-full rounded-lg shadow hidden"/>
-      <p class="text-sm text-gray-500 text-center mt-2">Ensure your NID is clear and readable</p>
+    <div class="text-center mb-8">
+      <h2 class="text-4xl font-extrabold text-red-700 tracking-tight drop-shadow-sm">Blood Donor Registration</h2>
+      <p class="text-gray-500 mt-2 text-base">Help save lives by registering as a blood donor. Fill in your details below.</p>
     </div>
 
-    <!-- Switch -->
-    <p class="mt-6 text-sm text-gray-600 text-center">
-      Already have an account?
-      <button onclick="switchToLogin()" class="text-pink-600 font-semibold hover:underline">Login</button>
+    <!-- Donor Form -->
+    <form id="donorForm" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Full Name -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
+          <input type="text" placeholder="Enter your full name" required 
+            class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm transition">
+        </div>
+
+        <!-- Age -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Age</label>
+          <input type="number" placeholder="18-65" required min="18" max="65"
+            class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm transition">
+        </div>
+      </div>
+
+      <!-- Gender & Blood Group -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Gender</label>
+          <select required 
+            class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm transition">
+            <option value="" disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Blood Group</label>
+          <select required 
+            class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm transition">
+            <option value="" disabled selected>Select Blood Group</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>O+</option><option>O-</option>
+            <option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Phone & Email -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
+          <input type="tel" placeholder="+8801XXXXXXXXX" required
+            class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm transition">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+          <input type="email" placeholder="example@mail.com"
+            class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm transition">
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Full Address</label>
+        <textarea placeholder="Enter your full address" required rows="3"
+          class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm transition"></textarea>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+        <input type="password" placeholder="Create Password" required
+          class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm transition">
+      </div>
+
+      <!-- Upload NID -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Upload NID</label>
+        <input type="file" id="nidUpload" accept="image/*" required
+          class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-red-500 outline-none shadow-sm bg-gray-50 transition">
+        <img id="nidPreview" class="w-full mt-4 rounded-lg shadow-md hidden" alt="NID Preview"/>
+      </div>
+
+      <!-- Submit -->
+      <div class="pt-4">
+        <button type="submit" 
+          class="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white py-3 rounded-xl shadow-lg font-semibold text-lg tracking-wide hover:shadow-red-300 hover:scale-[1.02] transition transform">
+          Register as Donor
+        </button>
+      </div>
+    </form>
+
+    <!-- Switch to Login -->
+    <p class="mt-8 text-sm text-gray-600 text-center">
+      Already registered?
+      <button onclick="switchToLogin()" class="text-red-600 font-semibold hover:underline">Login</button>
     </p>
   </div>
 </div>
+
+
+
 
 <!-- Login Modal -->
 <div class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" id="loginModal">
@@ -147,85 +219,9 @@
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
-<script>
-let generatedOTP = null;
-let otpVerified = false;
-const video = document.getElementById('camera');
-const canvas = document.getElementById('snapshot');
-const capturedImage = document.getElementById('capturedImage');
-const nidNumberInput = document.getElementById('nidNumber');
 
-function openModal(id) {
-  const modal = document.getElementById(id);
-  const box = modal.querySelector("div");
-  modal.classList.remove("hidden");
-  setTimeout(() => {
-    box.classList.remove("scale-95","opacity-0");
-    box.classList.add("scale-100","opacity-100");
-  }, 10);
-  if(id==='registerModal'){
-    navigator.mediaDevices.getUserMedia({video:true})
-      .then(stream=>video.srcObject=stream)
-      .catch(err=>alert("Camera not accessible: "+err));
-  }
-}
 
-function closeModal(id){
-  const modal=document.getElementById(id);
-  const box=modal.querySelector("div");
-  box.classList.remove("scale-100","opacity-100");
-  box.classList.add("scale-95","opacity-0");
-  setTimeout(()=>{
-    modal.classList.add("hidden");
-    if(id==='registerModal' && video.srcObject) video.srcObject.getTracks().forEach(t=>t.stop());
-  },200);
-}
 
-function switchToLogin(){closeModal('registerModal'); setTimeout(()=>openModal('loginModal'),250);}
-function switchToRegister(){closeModal('loginModal'); setTimeout(()=>openModal('registerModal'),250);}
-
-// OTP
-function sendOTP(){
-  const phone=document.getElementById('phone').value;
-  const phoneRegex=/^\+8801[0-9]{8}$/;
-  if(!phoneRegex.test(phone)){alert("❌ Enter valid Bangladeshi phone number"); return;}
-  generatedOTP=Math.floor(100000+Math.random()*900000);
-  console.log("Generated OTP:",generatedOTP);
-  alert("✅ OTP sent (demo). Check console.");
-  document.getElementById('otpInput').classList.remove('hidden');
-  document.getElementById('verifyBtn').classList.remove('hidden');
-}
-
-function verifyOTP(){
-  const entered=document.getElementById('otpInput').value;
-  if(entered==generatedOTP){otpVerified=true; alert("✅ OTP verified"); document.getElementById('otpInput').classList.add('hidden'); document.getElementById('verifyBtn').classList.add('hidden');}
-  else alert("❌ Invalid OTP");
-}
-
-// Capture NID + OCR
-function captureNID(){
-  const ctx=canvas.getContext('2d');
-  canvas.width=video.videoWidth; canvas.height=video.videoHeight;
-  ctx.drawImage(video,0,0,canvas.width,canvas.height);
-  const imageData=canvas.toDataURL('image/png');
-  capturedImage.src=imageData; capturedImage.classList.remove('hidden');
-  alert("✅ NID captured. Running OCR...");
-  Tesseract.recognize(imageData,'eng',{logger:m=>console.log(m)})
-    .then(({data:{text}})=>{
-      const nid=text.replace(/\D/g,'').slice(0,17);
-      nidNumberInput.value=nid||"";
-      if(nid) alert("✅ NID detected: "+nid);
-      else alert("⚠ Could not detect NID");
-    });
-}
-
-// Registration submit
-document.getElementById('registerForm').addEventListener('submit',function(e){
-  if(!otpVerified){e.preventDefault(); alert("❌ Verify phone first");}
-  else if(!nidNumberInput.value){e.preventDefault(); alert("❌ Capture NID first");}
-  else{alert("✅ Registration ready!");}
-});
-</script>
 
 <!-- bcryptjs CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
