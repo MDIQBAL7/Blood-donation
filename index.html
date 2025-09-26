@@ -1,121 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blood Donation</title>
-  <!-- tailwind css link  -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- css file link  -->
-   <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Donation</title>
+    <!-- tailwind css link  -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- css file link  -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Nav start-->
+    <nav
+      class="fixed w-full top-0 left-0 z-50 bg-gradient-to-r from-red-800 via-red-800 to-red-800 shadow-2xl backdrop-blur-md border-b border-red-700 transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div
+          class="max-w-[1140px] mx-auto flex justify-between items-center h-16"
+        >
+          <!-- Logo -->
+          <div class="flex items-center space-x-2">
+            <a
+              href="#home"
+              class="text-3xl font-extrabold text-white hover:text-yellow-400 transition-all duration-300"
+              >Blood Donation</a
+            >
+          </div>
 
-<!-- Nav start-->
-<nav class="fixed w-full top-0 left-0 z-50 bg-gradient-to-r from-red-800 via-red-800 to-red-800 shadow-2xl backdrop-blur-md border-b border-red-700 transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-    <div class="max-w-[1140px] mx-auto flex justify-between items-center h-16">
+          <!-- Desktop Menu -->
+          <div
+            class="hidden lg:flex items-center space-x-6 font-medium text-white tracking-wide"
+          >
+            <a href="#home" class="relative px-3 py-2 group">
+              Home
+              <span
+                class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
+              ></span>
+            </a>
+            <a href="#donate" class="relative px-3 py-2 group">
+              Donate
+              <span
+                class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
+              ></span>
+            </a>
+            <a href="#request" class="relative px-3 py-2 group">
+              Request
+              <span
+                class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
+              ></span>
+            </a>
+            <a href="#about" class="relative px-3 py-2 group">
+              About Us
+              <span
+                class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"
+              ></span>
+            </a>
 
-      <!-- Logo -->
-      <div class="flex items-center space-x-2">
-        <a href="#home" class="text-3xl font-extrabold text-white hover:text-yellow-400 transition-all duration-300">Blood Donation</a>
-      </div>
+            <div class="flex space-x-3 ml-4">
+              <a
+                href="#login"
+                class="px-5 py-2 bg-gradient-to-r from-pink-500 to-red-600 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300"
+                >Login</a
+              >
+              <a
+                href="#register"
+                class="px-5 py-2 bg-gradient-to-r from-rose-400 to-red-700 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300"
+                >Register</a
+              >
+            </div>
+          </div>
 
-      <!-- Desktop Menu -->
-      <div class="hidden lg:flex items-center space-x-6 font-medium text-white tracking-wide">
-        <a href="#home" class="relative px-3 py-2 group">
-          Home
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
-        </a>
-        <a href="#donate" class="relative px-3 py-2 group">
-          Donate
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
-        </a>
-        <a href="#request" class="relative px-3 py-2 group">
-          Request
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
-        </a>
-        <a href="#about" class="relative px-3 py-2 group">
-          About Us
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
-        </a>
-
-        <div class="flex space-x-3 ml-4">
-          <a href="#login" class="px-5 py-2 bg-gradient-to-r from-pink-500 to-red-600 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300">Login</a>
-          <a href="#register" class="px-5 py-2 bg-gradient-to-r from-rose-400 to-red-700 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300">Register</a>
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden flex items-center">
+            <button id="mobile-menu-button" class="focus:outline-none">
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <div class="lg:hidden flex items-center">
-        <button id="mobile-menu-button" class="focus:outline-none">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
+      <!-- Animated Glassmorphic Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="lg:hidden fixed top-16 right-0 w-64 h-screen bg-gradient-to-r from-pink-600 via-red-700 to-red-800 bg-[length:300%_300%] animate-gradient-slide backdrop-blur-xl border-l border-white/20 rounded-l-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out"
+      >
+        <div class="flex flex-col px-6 pt-6 space-y-4">
+          <a
+            href="#home"
+            class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
+            >Home</a
+          >
+          <a
+            href="#donate"
+            class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
+            >Donate</a
+          >
+          <a
+            href="#request"
+            class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
+            >Request</a
+          >
+          <a
+            href="#about"
+            class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
+            >About Us</a
+          >
+          <a
+            href="#login"
+            class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
+            >Login</a
+          >
+          <a
+            href="#register"
+            class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300"
+            >Register</a
+          >
+        </div>
+      </div>
+    </nav>
+    <!-- Nav end-->
+
+    <!-- Hero section start  -->
+    <section
+      class="relative w-full bg-gradient-to-r from-red-800 via-red-800 to-red-800 overflow-hidden pt-24 sm:pt-24"
+    >
+      <!-- Background image -->
+      <div class="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1588776814546-4f0f9c1c5f7b?auto=format&fit=crop&w=1600&q=80"
+          alt="Blood Donation"
+          class="w-full h-full object-cover opacity-30"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-red-800 via-red-800 to-pink-600 opacity-70"
+        ></div>
       </div>
 
-    </div>
-  </div>
+      <!-- Content -->
+      <div
+        class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col justify-center items-start h-screen text-white"
+      >
+        <!-- Hero animated headline -->
+        <h1
+          class="text-[25px] sm:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow-lg"
+        >
+          <span class="clip-text">Give Blood, Save Life</span>
+        </h1>
 
-  <!-- Animated Glassmorphic Mobile Menu -->
-  <div id="mobile-menu" class="lg:hidden fixed top-16 right-0 w-64 h-screen bg-gradient-to-r from-pink-600 via-red-700 to-red-800 bg-[length:300%_300%] animate-gradient-slide backdrop-blur-xl border-l border-white/20 rounded-l-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out">
-    <div class="flex flex-col px-6 pt-6 space-y-4">
-      <a href="#home" class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300">Home</a>
-      <a href="#donate" class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300">Donate</a>
-      <a href="#request" class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300">Request</a>
-      <a href="#about" class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300">About Us</a>
-      <a href="#login" class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300">Login</a>
-      <a href="#register" class="mobile-item opacity-0 translate-x-10 block px-3 py-2 rounded-md text-white hover:text-yellow-400 hover:bg-white/20 transition duration-300">Register</a>
-    </div>
-  </div>
-</nav>
-<!-- Nav end-->
+        <!-- Subtext -->
+        <p class="mt-4 text- sm:text-xl lg:text-2xl max-w-2xl drop-shadow-md">
+          Join our nationwide blood donation network and help those in need.
+          Your one donation can save multiple lives.
+        </p>
 
+        <!-- CTA Buttons -->
+        <div class="mt-8 flex flex-row justify-start gap-4 flex-wrap">
+          <!-- Donate Button -->
+          <a
+            href="#donate"
+            class="px-6 py-3 rounded-full font-semibold text-white shadow-lg bg-gradient-to-r from-pink-500 to-red-600 text-center transition-transform duration-300 transform hover:scale-105 hover:shadow-xl"
+          >
+            Donate Blood
+          </a>
 
-<!-- Hero section start  -->
- <!-- Hero Section -->
-<section class="relative w-full bg-gradient-to-r from-red-800 via-red-800 to-red-800 overflow-hidden">
-  <!-- Background image -->
-  <div class="absolute inset-0">
-    <img src="https://images.unsplash.com/photo-1588776814546-4f0f9c1c5f7b?auto=format&fit=crop&w=1600&q=80" alt="Blood Donation" class="w-full h-full object-cover opacity-30">
-    <div class="absolute inset-0 bg-gradient-to-r from-red-800 via-red-800 to-red-800 opacity-70"></div>
-  </div>
+          <!-- Request Button -->
+          <a
+            href="#request"
+            class="px-6 py-3 rounded-full font-bold text-red-900 shadow-lg bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 text-center transition-transform duration-300 transform hover:scale-105 hover:shadow-xl"
+          >
+            Request Blood
+          </a>
+        </div>
+        <!-- Decorative Glass Card -->
+        <div
+          class="mt-12 w-full max-w-md p-6 bg-white/10 backdrop-blur-xl rounded-xl shadow-2xl border border-white/20"
+        >
+          <p class="text-white text-lg font-medium text-center">
+            Be a Hero Today! Register as a donor and make a difference.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Hero section end  -->
 
-  <!-- Content -->
-  <div class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col justify-center items-start h-screen text-white">
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight drop-shadow-lg">
-      Give Blood, Save Life
-    </h1>
-    <p class="mt-4 text-lg sm:text-xl lg:text-2xl max-w-2xl drop-shadow-md">
-      Join our nationwide blood donation network and help those in need. Your one donation can save multiple lives.
-    </p>
-
-    <!-- CTA Buttons -->
-    <div class="mt-8 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-      <a href="#donate" class="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-600 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition duration-300">
-        Donate Blood
-      </a>
-      <a href="#request" class="px-6 py-3 bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 rounded-full text-red-900 font-bold shadow-lg hover:scale-105 transform transition duration-300">
-        Request Blood
-      </a>
-    </div>
-
-    <!-- Decorative Glass Card -->
-    <div class="mt-12 w-full max-w-md p-6 bg-white/10 backdrop-blur-xl rounded-xl shadow-2xl border border-white/20">
-      <p class="text-white text-lg font-medium text-center">
-        Be a Hero Today! Register as a donor and make a difference.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Hero section end  -->
-
-
-
-
-<!-- js file link  -->
- <script src="app.js"></script>
-</body>
+    <!-- js file link  -->
+    <script src="app.js"></script>
+  </body>
 </html>

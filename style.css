@@ -8,5 +8,23 @@
   .animate-gradient-slide {
     animation: gradient-slide 8s ease infinite;
   }
-  
+
 /* Nav style end  */
+
+/* hero section style start  */
+.clip-text {
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  animation: revealHide 10s linear infinite;
+}
+
+/* Effect: hide (right→left) then show (left→right) */
+@keyframes revealHide {
+  0%   { clip-path: inset(0 0 0 0); }        /* fully visible */
+  40%  { clip-path: inset(0 100% 0 0); }     /* hidden from right */
+  60%  { clip-path: inset(0 100% 0 0); }     /* pause hidden */
+  100% { clip-path: inset(0 0 0 0); }        /* visible again left→right */
+}
+/* hero section style end */
